@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cont">
+    <div class="cnt1">
+        <h1>Регистрация</h1> <br>
+       <div class="cnt2">
+    <input type="text" id="name"></div> <br>
+    <input type="password" id="password" inputmode="numeric" minlength="8" size="8">   <br>
+    <input type="button" value="Регистрация" onclick="regist()"> <bR>
+    <input type="button" value="Выйти" onclick="rem()">
+</div>
+    <h2 id='active_name'></h2>
+</div>
+</body>
+<script>
+    function regist() {
+        let name = document.getElementById('name').value;
+        let password = document.getElementById('password').value;
+        if (localStorage.getItem(name)==null) {
+            if (password.length >=8) {
+            let new_user = {
+                user_name: name,
+                user_password: password 
+            }
+            localStorage.setItem(new_user.user_name, JSON.stringify(new_user));
+            localStorage.setItem("active_user", new_user.user_name)
+            document.getElementById('active_name').textContent = localStorage['active_user']
+            console.log("Новый пользователь добавлен")
+        } else {
+            document.getElementById('er').textContent = 'Пароль должен быть не менее 8 символов'
+        }
+    }
+    function rem () {
+        localStorage.removeItem('active_user')
+        document.getElementById("active_name").textContent = ' '
+    }
+    
+            
+}
+    </script>
+</html>
